@@ -13,7 +13,27 @@ def detail_view(request, pk):
         obj = News.objects.get(id=pk)
     except News.DoesNotExist:
         raise Http404
+    
+    print(request.POST)
+    print(request.GET)
+    print(request.method == "POST")
+    print(request.method == "GET")
 
     return render(request, 'news/detail.html', {'single_object': obj})
+    
+
+
+
+
+def test_view(request, *args, **kwargs):
+    print(request.GET)
+    data = dict(request.GET)
+    print(data)
+    obj=News.objects.get(id=data['pk'][0])
+    return HttpResponse(f'<b>{obj.article}</b>')
+
+
+
+
     
 
