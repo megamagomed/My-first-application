@@ -2,6 +2,7 @@ from http.client import HTTPResponse
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
 from news.models import News
+from .forms import NewsForm
 
 def index(request, *args, **kwards):
     qs = News.objects.all()
@@ -28,10 +29,16 @@ def detail_view(request, pk):
 def test_view(request, *args, **kwargs):
     print(request.GET)
     data = dict(request.GET)
-    print(data)
     obj=News.objects.get(id=data['pk'][0])
     return HttpResponse(f'<b>{obj.article}</b>')
 
+def create_view(request, *args, **kwargs):
+    if request.method == "POST" and request.POST['article']:
+        form = NewsForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data.get('article'))
+        
+    return render(request, 'forms.html')
 
 
 
