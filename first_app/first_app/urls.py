@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from news.views import index, detail_view, test_view, create_view
+from testapp.views import testapp_func
+from testapp2.views import testapp2_func
 
 urlpatterns = [
     path('', index),
@@ -23,4 +25,6 @@ urlpatterns = [
     path('test_view', test_view),
     path('news/create/', create_view),
     path('admin/', admin.site.urls),
+    path('testapp', testapp_func),
+    path('testapp2', testapp2_func),
 ]

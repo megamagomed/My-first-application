@@ -35,6 +35,7 @@ def test_view(request, *args, **kwargs):
 def create_view(request, *args, **kwargs):
     if request.method == "POST" and request.POST['article']:
         form = NewsForm(request.POST)
+        print(form.is_valid())
         if form.is_valid():
             print(form.cleaned_data.get('article'))
         
