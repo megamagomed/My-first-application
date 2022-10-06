@@ -28,18 +28,16 @@ def detail_view(request, pk):
 
 def test_view(request, *args, **kwargs):
     print(request.GET)
-    data = dict(request.GET)
-    obj=News.objects.get(id=data['pk'][0])
-    return HttpResponse(f'<b>{obj.article}</b>')
+    return HttpResponse("test view")
 
 def create_view(request, *args, **kwargs):
-    if request.method == "POST" and request.POST['article']:
-        form = NewsForm(request.POST)
-        print(form.is_valid())
-        if form.is_valid():
-            print(form.cleaned_data.get('article'))
-        
-    return render(request, 'forms.html')
+    form = NewsForm(request.POST or None)
+
+    if form.is_valid():
+        data =  form.cleaned_data
+        News.objects.create(**data)
+        print(form.cleaned_data)    
+    return render(request, 'forms.html', {'form': form})
 
 
 

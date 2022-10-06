@@ -18,6 +18,7 @@ from django.urls import path
 from news.views import index, detail_view, test_view, create_view
 from testapp.views import testapp_func
 from testapp2.views import testapp2_func
+from testapp3.views import testapp3_func
 
 urlpatterns = [
     path('', index),
@@ -27,4 +28,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('testapp', testapp_func),
     path('testapp2', testapp2_func),
+    path('testapp3', testapp3_func),
 ]
